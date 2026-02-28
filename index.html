@@ -461,6 +461,24 @@
             </p>
             </div>
 
+            <div style="text-align:center; margin:1rem 0;">
+                <figure style="text-align:center; margin:1rem 0;">
+                <img src="static/images/goal-related_reward_locomotion.png"
+                     alt="Multi-agent Setting in Locomotion"
+                     loading="lazy"
+                     style="max-width:80%; height:auto;"/>
+                  <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
+                    Multi-agent setting and structured factorization for locomotion tasks.
+                  </figcaption>
+                </figure>
+              </div>
+             <p class="content">
+              <strong>Goal-related Rewards Design:</strong> For joint-control tasks, we design a global goal-related reward to evaluate the collective efficacy of the unified control system.
+              The reward is computed based on the global observation and the global goal, reflecting the overall performance of the entire robot (e.g., the locomotion system’s global orientation and position). 
+              The same scalar reward value is then broadcast to all agents, ensuring consistent optimization across all control modules.
+              This design allows all agents in the unified control system to jointly pursue the same global objective while maintaining synchronized reward feedback.
+            </p>
+            
             <div class="column is-full">
               <h3 class="title is-4" style="margin-bottom:0.75rem;">2. Hierarchical Loco-Manipulation Architecture</h3>
               <div style="text-align:center; margin:1rem 0;">
