@@ -395,7 +395,7 @@
                loading="lazy"
                style="max-width:80%; height:auto;" />
           <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
-            We proposed our baselines under both fully decentralized and CTDE paradigms. To enable goal-conditioned learning under the fully decentralized setting, we introduce a structured factorization of the global goal into individualized goal representations, allowing each agent to make decisions solely based on local information. In the CTDE setting, we integrate individual goals into a unified global objective to enhance value learning, while conditioning each actor on its local goal for decentralized execution. 
+            Fully decentralized and CTDE paradigms with structured goal factorization for goal-conditioned offline MARL
           </figcaption>
         </figure>
         <p>
@@ -428,10 +428,15 @@
             <div class="column is-full">
               <h3 class="title is-4" style="margin-bottom:0.75rem;">Cooperative Locomotion</h3>
               <div style="text-align:center; margin:1rem 0;">
+                <figure style="text-align:center; margin:1rem 0;">
                 <img src="static/images/multi-agent_locomotion.png"
                      alt="Multi-agent Setting in Locomotion"
                      loading="lazy"
                      style="max-width:80%; height:auto;"/>
+                  <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
+                    Multi-agent setting and structured factorization for locomotion tasks.
+                  </figcaption>
+                </figure>
               </div>
              <p class="content">
               <strong>Multi-Agent Setting:</strong> We introduce a structured factorization of the robot body into different joints to make multiple agents within a single robot locomote cooperatively. The locomotion tasks involve three distinct multi-agent settings, including 2 agents × 4 joints, 2 agents × 4 joints (diagonal) and 4 agents × 2 joints.
