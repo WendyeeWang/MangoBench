@@ -343,27 +343,37 @@
           <!-- TODO: Replace with your paper overview -->
           <h3 class="title is-4" style="margin-bottom:0.75rem;">Why Goal-Conditioned Offline MARL?</h3>
             <p>
-            Offline Multi-Agent Reinforcement Learning (MARL) seeks to learn coordinated behaviors purely from static datasets, which is critical for domains where real-world interaction is costly, risky, or impractical. However, existing offline MARL methods rely heavily on carefully shaped reward functions and often fail to generalize to new goals. This limitation restricts their scalability and real-world applicability. 
+            Offline MARL learns coordinated policies purely from pre-collected datasets, avoiding costly and unsafe real-world exploration. However, two fundamental limitations hinderits practical deployment: even minor perturbations in handcrafted reward functions can cause drastic policy shifts, and task-specific reward designs prevent agents from generalizing to new goals.
             
             Goal-conditioned learning provides a natural and domain-agnostic alternative: instead of optimizing a fixed reward, agents learn to reach arbitrary target states from data. This formulation enables unsupervised multi-goal training and encourages reusable, general-purpose coordination policies.
             </p>
       
-            <h3 class="title is-4" style="margin-bottom:0.75rem;">Introducing MangoBench</h2>
+            <h3 class="title is-4" style="margin-bottom:0.75rem;">Our Framework</h3>
             <p>
-            To bridge this gap, we propose the first goal-conditioned offline MARL framework, extending single-agent goal-conditioned RL to multi-agent settings under both fully decentralized and centralized training with decentralized execution (CTDE) paradigms. 
+              We establish the <strong>first goal-conditioned offline MARL framework</strong>, extending
+              OGCRL to multi-agent scenarios under both fully decentralized and CTDE paradigms. In the
+              decentralized setting, we introduce a structured factorization of the global goal into
+              individualized representations, enabling each agent to act on local information alone. In
+              the CTDE setting, individual goals are integrated into a unified global objective for
+              richer value learning, while each actor remains conditioned on its local goal for
+              decentralized execution.
+            </p>
             
-            To systematically evaluate this new setting, we introduce MangoBench, the first fully cooperative multi-goal benchmark for offline MARL. MangoBench covers 3 environments, 4 agent types, and 47 tasks, spanning joint-control locomotion, synchronous and asynchronous bimanual manipulation, and robustness under high-dimensional observations. 
-            
-            Extensive experiments demonstrate strong multi-goal generalization under sparse rewards, yet no method consistently dominates all tasks, revealing both the intrinsic complexity and the significant unexplored potential of goal-conditioned offline MARL.
+            <h3 class="title is-4" style="margin-bottom:0.75rem;">MangoBench</h3>
+            <p>
+              To systematically evaluate this new setting, we introduce <strong>MangoBench</strong> —
+              the <strong>first fully cooperative multi-goal benchmark</strong> for goal-conditioned
+              offline MARL. It covers 3 environments, 4 agent types, 45 locomotion tasks, 2 manipulation
+              tasks, and 6 baseline algorithms, supporting both multi-entity and joint-control
+              configurations with sparse binary rewards.
             </p>
             
             <h3 class="title is-4" style="margin-bottom:0.75rem;">Features</h2>
             <ul>
               <li>First goal-conditioned offline MARL framework.</li>
               <li>Support for both fully decentralized and CTDE training paradigms.</li>
-              <li>3 environments, 4 agent types, and 47 cooperative multi-goal tasks.</li>
-              <li>Evaluation under sparse rewards and high-dimensional observations.</li>
-              <li>Designed to assess coordination, generalization, and robustness.</li>
+              <li>3 environments, 4 agent types, and 47 cooperative multi-goal tasks under different levels of difficulty.</li>
+              <li>goal-related rewards, standardized goal-conditioned MARL datasets, and multi-goal evaluation.</li>
             </ul>
         </div>
       </div>
