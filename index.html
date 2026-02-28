@@ -361,7 +361,7 @@
             
             <h3 class="title is-4" style="margin-bottom:0.75rem;">MangoBench</h3>
             <p>
-              To systematically evaluate this new setting, we introduce <strong>MangoBench</strong> —
+              Existing MARL benchmarks primarily evaluate online algorithms using dense, task-specific rewards, making them unsuitable for goal-conditioned offline scenarios that rely on sparse, goal-based rewards and require multi-goal generalization. Moreover, most current environments focus only on single-goal evaluations, leading to biased and incomplete assessments of goal-conditioned policies. To address these gaps, we create <strong>MangoBench</strong> —
               the <strong>first fully cooperative multi-goal benchmark</strong> for goal-conditioned
               offline MARL. It covers 3 environments, 4 agent types, 45 locomotion tasks, 2 manipulation
               tasks, and 6 baseline algorithms, supporting both multi-entity and joint-control
@@ -389,6 +389,15 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Proposed Baseline Algorithms</h2>
         <div class="content has-text-justified">
+        <figure style="text-align:center; margin:1rem 0;">
+          <img src="static/images/comprehensive_baselines.png"
+               alt="Comprehensive Baselines"
+               loading="lazy"
+               style="max-width:80%; height:auto;" />
+          <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
+            We proposed our baselines under both fully decentralized and CTDE paradigms. To enable goal-conditioned learning under the fully decentralized setting, we introduce a structured factorization of the global goal into individualized goal representations, allowing each agent to make decisions solely based on local information. In the CTDE setting, we integrate individual goals into a unified global objective to enhance value learning, while conditioning each actor on its local goal for decentralized execution. 
+          </figcaption>
+        </figure>
         <p>
           Given the lack of existing algorithms tailored for goal-conditioned offline MARL, we introduce six baseline methods, four derived from goal-conditioned offline RL and two from offline MARL, to establish a foundation for future research and advancements in this direction.
         </p>
@@ -404,105 +413,264 @@
   </div>
 </section>
 <!-- End Baseline Algorithms -->
+
+ <!-- Benchmark -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Proposed Benchmark: MangoBench</h2>
+        <div class="columm">
+          <p class="subtitle has-text-centered" style="margin-top:1rem;">
+            MangoBench combines multi-agent setting, converted RL datasets, multi-goal evaluation, rewards design, and different tasks for cooperative locomotion and manipulation.
+          </p>
+        </div>
+        <div class="content" style="margin-top:2rem; max-width:900px; margin-left:auto; margin-right:auto;">
+          <div class="columns is-multiline">
+            <div class="column is-full">
+              <h3 class="title is-4" style="margin-bottom:0.75rem;">Cooperative Locomotion</h3>
+              <div style="text-align:center; margin:1rem 0;">
+                <img src="static/images/multi-agent_locomotion.png"
+                     alt="Multi-agent Setting in Locomotion"
+                     loading="lazy"
+                     style="max-width:80%; height:auto;"/>
+              </div>
+             <p class="content">
+              <strong>Multi-Agent Setting:</strong> We introduce a structured factorization of the robot body into different joints to make multiple agents within a single robot locomote cooperatively. The locomotion tasks involve three distinct multi-agent settings, including 2 agents × 4 joints, 2 agents × 4 joints (diagonal) and 4 agents × 2 joints.
+            </p>
+            
+            <ul>
+              <li>
+                <strong>2 agents × 4 joints:</strong> The ant has 4 legs, each with 2 joints, totaling 8 joints. In this setting, the 8 joints are split between two agents, each controlling 4 joints. The division typically follows a left-right or front-back grouping.
+              </li>
+            
+              <li>
+                <strong>2 agents × 4 joints (D):</strong> This variant also assigns four joints to each of the two agents, but the assignment is done diagonally. For instance, one agent may control the front-left and rear-right legs, while the other controls the front-right and rear-left legs. This cross-pattern configuration introduces more complex coordination dynamics.
+              </li>
+            
+              <li>
+                <strong>4 agents × 2 joints:</strong> Each leg (2 joints) is controlled by a separate agent. Thus, 4 agents are assigned one leg each, requiring a higher level of coordination among more agents, each with more localized control.
+              </li>
+            </ul>
+            
+            <p class="content">
+              The global goal corresponds to the complete joint states of the ant, whereas the local goals are derived from the structured factorization of the robot’s body, where each body part is assigned a goal based on its corresponding local joints for baseline training.
+            </p>
+            </div>
+
+            <div class="column is-full">
+              <h3 class="title is-4" style="margin-bottom:0.75rem;">2. Hierarchical Loco-Manipulation Architecture</h3>
+              <div style="text-align:center; margin:1rem 0;">
+                <img src="static/images/policy_overview.png"
+                     alt="Hierarchical decPLM policy with shared high-level and low-level controllers for each quadruped-arm robot"
+                     loading="lazy"
+                     style="max-width:80%; height:auto;"/>
+              </div>
+              <p class="content">
+                decPLM uses a hierarchical policy structure that separates high-level manipulation from low-level
+                locomotion. Each robot receives:
+              </p>
+              
+              <ul class="content" style="margin-left:1.5rem;">
+                <li>its proprioceptive state <em>s</em>,</li>
+                <li>a contact-frame command <em>C<sub>cf</sub></em> derived from the payload command,</li>
+                <li>and (in cf<sup>+</sup> mode) the relative contact-frame pose <em><sup>b</sup>T<sub>cf</sub></em>.</li>
+              </ul>
+              
+              <p class="content">
+                The <strong>high-level policy</strong> &pi;<sup>h</sup><sub>&theta;<sub>h</sub></sub> maps these inputs to:
+              </p>
+              
+              <ul class="content" style="margin-left:1.5rem;">
+                <li>arm joint targets for regulating contact forces, and</li>
+                <li>a desired base velocity command.</li>
+              </ul>
+              
+              <p class="content">
+                The <strong>low-level locomotion policy</strong> &pi;<sup>b</sup><sub>&theta;<sub>b</sub></sub> converts the base velocity into leg motor
+                setpoints, and both arm and base targets are tracked by PD controllers. This hierarchy lets
+                &pi;<sup>h</sup><sub>&theta;<sub>h</sub></sub> focus on manipulation and payload tracking while &pi;<sup>b</sup><sub>&theta;<sub>b</sub></sub> ensures stable quadruped
+                locomotion.
+              </p>
+              
+            </div>
+
+            <div class="column is-full">
+              <h3 class="title is-4" style="margin-bottom:0.75rem;">3. Constellation-Based Reward</h3>
+              <p class="content">
+                The central design choice is a <strong>constellation reward</strong> that encourages robots to behave
+                as if they were rigidly attached to their contact frames on the payload. We define two sets of
+                virtual landmark points:
+              </p>
+              <ul class="content" style="margin-left:1.5rem;">
+                <li>
+                  An <strong>end-effector contact constellation</strong> aligns the contact pad with the commanded
+                  contact frame, enforcing consistent surface normals and stable pinching.
+                </li>
+                <li>
+                  A <strong>base tracking constellation</strong> encourages the robot base to move consistently with
+                  the commanded payload motion, as if connected through a rigid kinematic chain.
+                </li>
+              </ul>
+              <div style="text-align:center; margin:1rem 0;">
+                <img src="static/images/constellation_reward.png"
+                     alt="Constellation reward aligning virtual points on the robot and payload to enforce rigid-like contact"
+                     loading="lazy"
+                     style="max-width:80%; height:auto;"/>
+              </div>
+              <p class="content">
+                By minimizing the mean squared distance between each pair of <span style="color:#1e88e5;">blue</span>
+                (robot-anchored) and <span style="color:#43a047;">green</span> (payload-anchored) constellation points, the
+                policy aligns both position and orientation of the robot relative to its contact frame. This allows
+                the robots to behave as if rigidly linked to the payload, without explicit mechanical couplings or
+                hand-designed force-balancing strategies.
+              </p>
+              
+            </div>
+
+            <div class="column is-full">
+              <h3 class="title is-4" style="margin-bottom:0.75rem;">4. Curriculum over Pinch, Lift, and Move</h3>
+            
+              <p class="content">
+                Learning the full pinch-lift-move behavior in one shot is difficult. We therefore employ a
+                curriculum that gradually increases task complexity:
+              </p>
+            
+              <table class="table is-fullwidth is-striped is-hoverable">
+                <thead>
+                  <tr>
+                    <th style="width:12%; text-align:center;">Phase</th>
+                    <th style="width:20%; text-align:center;">Demo</th>
+                    <th style="width:68%;">Description</th>
+                  </tr>
+                </thead>
+              
+                <tbody>
+              
+                  <!-- PINCH -->
+                  <tr>
+                    <td style="text-align:center; font-weight:600;">Pinch</td>
+                    <td style="text-align:center;">
+                      <img src="static/gifs/pinch.gif"
+                           alt="Pinch phase demonstration"
+                           style="max-width:100%; border-radius:8px;">
+                    </td>
+                    <td style="text-align:justify; line-height:1.5;">
+                      Robots learn to reach and establish stable contact at their assigned frames while the payload
+                      is held fixed with no motion commands, focusing entirely on contact formation.
+                    </td>
+                  </tr>
+              
+                  <!-- LIFT -->
+                  <tr>
+                    <td style="text-align:center; font-weight:600;">Lift</td>
+                    <td style="text-align:center;">
+                      <img src="static/gifs/lift.gif"
+                           alt="Lift phase demonstration"
+                           style="max-width:100%; border-radius:8px;">
+                    </td>
+                    <td style="text-align:justify; line-height:1.5;">
+                      Robots coordinate vertical forces to raise the payload in response to height commands,
+                      maintaining synchronized lifting under randomized payload masses.
+                    </td>
+                  </tr>
+              
+                  <!-- MOVE -->
+                  <tr>
+                    <td style="text-align:center; font-weight:600;">Move</td>
+                    <td style="text-align:center;">
+                      <img src="static/gifs/move.gif"
+                           alt="Move phase demonstration"
+                           style="max-width:100%; border-radius:8px;">
+                    </td>
+                    <td style="text-align:justify; line-height:1.5;">
+                      Robots perform full cooperative transport, tracking planar velocity, yaw, and height commands
+                      while regulating contact forces through coordinated loco-manipulation.
+                    </td>
+                  </tr>
+              
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
     
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
+<!-- GRID SECTION -->
+<section class="section">
+  <div class="columns is-centered is-multiline">
+    <div class="column is-three-fifths">
+      <h2 class="title is-3 has-text-centered">Proposed Benchmark: MangoBench</h2>
+      <p class="content has-text-centered" style="margin-bottom:1.5rem;">
+        To better evaluate the goal-conditioned offline MARL baselines, we create MangoBench. In this section, we will introduce our multi-agent setting, converted RL datasets, multi-goal evaluation, rewards design, and different tasks for cooperative locomotion and manipulation of our benchmarks.
+      </p>
+      
+      <div class="columns is-multiline">
+        <div class="column is-half">
+          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Training in Simulation</h3>
+          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+            <source src="static/videos/training.mp4" type="video/mp4">
           </video>
+          <p class="content is-size-7" style="margin-top:0.5rem;">
+            decPLM is trained in IsaacLab with 2 Unitree Go2 quadrupeds and D1 arms using MAPPO and extensive
+            domain randomization over dynamics, contact parameters, and sensor noise.
+          </p>
         </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
+        <div class="column is-half">
+          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Generalization to 2-10 Robots</h3>
+          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+            <source src="static/videos/generalization_2_to_10_robot_grid.mp4" type="video/mp4">
           </video>
+          <p class="content is-size-7" style="margin-top:0.5rem;">
+            A single policy trained only with 2 robots transfers to teams of 2-10 robots without retraining,
+            maintaining stable pinch-lift-move behaviors and improving tracking as team size increases.
+          </p>
         </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
+        <div class="column is-half">
+          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Evaluation on Diverse Payloads</h3>
+          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+            <source src="static/videos/evaluation_on_diverse_payload.mp4" type="video/mp4">
           </video>
+          <p class="content is-size-7" style="margin-top:0.5rem;">
+            Policies trained on a box payload generalize to out-of-distribution objects such as logs, barrels,
+            and couches with different geometries and masses, without task-specific retraining.
+          </p>
+        </div>
+        <div class="column is-half">
+          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (2 robots)</h3>
+          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+            <source src="static/videos/sim2real_2_robots.mp4" type="video/mp4">
+          </video>
+          <p class="content is-size-7" style="margin-top:0.5rem;">
+            Two Unitree Go2 robots successfully execute the learned policy on real hardware, performing smooth
+            pinch, lift, and transport motions using decentralized control.
+          </p>              
+        </div>
+        <div class="column is-half">
+          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (3 robots)</h3>
+          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+            <source src="static/videos/sim2real_3_robots.mp4" type="video/mp4">
+          </video>
+          <p class="content is-size-7" style="margin-top:0.5rem;">
+            The same decentralized policy extends naturally to a 3-robot team, showing synchronized real-world
+            coordination driven entirely by shared policy parameters.
+          </p>
+        </div>
+        <div class="column is-half">
+          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (4 robots)</h3>
+          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+            <source src="static/videos/sim2real_4_robots.mp4" type="video/mp4">
+          </video>
+          <p class="content is-size-7" style="margin-top:0.5rem;">
+            A 4-robot team demonstrates cooperative transport with the same policy, highlighting the scalability
+            and real-world transferability of decPLM's decentralized design.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
 
 
 
