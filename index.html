@@ -371,7 +371,7 @@
             <h3 class="title is-4" style="margin-bottom:0.75rem;">Features</h2>
             <ul>
               <li>First goal-conditioned offline MARL framework.</li>
-              <li>Support for both fully decentralized and CTDE training paradigms.</li>
+              <li>Propose 6 baseline algorithms, supporting for both fully decentralized and CTDE training paradigms.</li>
               <li>3 environments, 4 agent types, and 47 cooperative multi-goal tasks under different levels of difficulty.</li>
               <li>goal-related rewards, standardized goal-conditioned MARL datasets, and multi-goal evaluation.</li>
             </ul>
@@ -382,7 +382,29 @@
 </section>
 <!-- End paper overview -->
     
-
+<!-- Proposed Baseline Algorithms -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Proposed Baseline Algorithms</h2>
+        <div class="content has-text-justified">
+        <p>
+          Given the lack of existing algorithms tailored for goal-conditioned offline MARL, we introduce six baseline methods, four derived from goal-conditioned offline RL and two from offline MARL, to establish a foundation for future research and advancements in this direction.
+        </p>
+            <ul>
+              <li><strong>GCMBC</strong>: A fully decentralized extension of GCBC, serving as a fundamental baseline representing the behavioral performance of the dataset. </li>
+              <li><strong>ICRL</strong>: A fully decentralized multi-agent extension of CRL, designed to evaluate the effectiveness of contrastive value learning in handling sparse rewards for multi-agent tasks.</li>
+              <li><strong>IHIQL</strong> and <strong>HIQL-CTDE</strong>: To build stronger benchmark baselines and evaluate different training paradigms, we extend the state-of-the-art HIQL into the goal-conditioned offline MARL setting, introducing IHIQL (fully decentralized) and HIQL-CTDE (centralized training with decentralized execution), both leveraging hierarchical policies to enhance robustness against sparse rewards and improve long-horizon reasoning.</li>
+              <li><strong>GCOMIGA</strong> and <strong>GCOMAR</strong>: To evaluate whether the current offline MARL can robustly handle the noise caused by sparse rewards to learn useful policy under the goal-conditioned environment, we designed GCOMIGA and GCOMAR by goal relabeling and randomly goal sampling, the goal-conditioned variants of OMIGA and OMAR.</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Baseline Algorithms -->
+    
 <!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">
