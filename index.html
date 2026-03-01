@@ -423,6 +423,8 @@
             MangoBench combines multi-agent setting, converted RL datasets, multi-goal evaluation, rewards design, and different tasks for cooperative locomotion and manipulation.
           </p>
         </div>
+
+        
         <div class="content" style="margin-top:2rem; max-width:900px; margin-left:auto; margin-right:auto;">
           <div class="columns is-multiline">
             <div class="column is-full">
@@ -483,7 +485,7 @@
               </p>
 
               <p class="content">
-                <strong>Tasks and Demos:</strong> We extend the AntMaze and AntSoccer tasks in OGBench to a multi-agent setting. Example demos are shown as below.
+                <strong>Tasks and Demos:</strong> We extend the AntMaze and AntSoccer tasks in OGBench to a multi-agent setting. Example demos are shown as below, note that the first row of the videos corresponds to the input goal state.
               </p>
               <div class="columns is-multiline">
                 <div class="column is-half">
@@ -522,109 +524,127 @@
                     The Maze setting introduces walls and narrow corridors between the start and goal positions, where agents must combine locomotion, ball control, and navigation planning to maneuver through the maze without trapping the ball, making it significantly more challenging than the open-field setting.
                   </p>              
                 </div>
-                <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (3 robots)</h3>
-                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/sim2real_3_robots.mp4" type="video/mp4">
-                  </video>
-                  <p class="content is-size-7" style="margin-top:0.5rem;">
-                    The same decentralized policy extends naturally to a 3-robot team, showing synchronized real-world
-                    coordination driven entirely by shared policy parameters.
-                  </p>
-                </div>
-                <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (4 robots)</h3>
-                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/sim2real_4_robots.mp4" type="video/mp4">
-                  </video>
-                  <p class="content is-size-7" style="margin-top:0.5rem;">
-                    A 4-robot team demonstrates cooperative transport with the same policy, highlighting the scalability
-                    and real-world transferability of decPLM's decentralized design.
-                  </p>
-                </div>
+              
               </div>
               
               
             </div>
           </div>
         </div>
+
+
+
+         <div class="content" style="margin-top:2rem; max-width:900px; margin-left:auto; margin-right:auto;">
+          <div class="columns is-multiline">
+            <div class="column is-full">
+              <h3 class="title is-4" style="margin-bottom:0.75rem;">Cooperative Manipulation</h3>
+                <div style="text-align:center; margin:1rem 0;">
+                  <figure style="text-align:center; margin:1rem 0;">
+                  <img src="static/images/multi-agent_manipulation.png"
+                       alt="Multi-agent Setting in Manipulation"
+                       loading="lazy"
+                       style="max-width:70%; height:auto;"/>
+                    <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
+                      Multi-agent setting with multiple entities in manipulation tasks.
+                    </figcaption>
+                  </figure>
+                </div>
+               <p class="content">
+                <strong>Multi-Agent Setting:</strong> To construct diverse multi-agent forms for a comprehensive evaluation of the baseline algorithms, we introduce multiple agent entities in the cooperative manipulation environment. For each robotic arm, its local visual observation is randomly sampled as the local goal, whereas the global goal is defined from the sampled global visual observation including both arms and the surrounding environment, serving as the goal input for training the goal-conditioned baselines.
+              </p>
+
+              <div style="text-align:center; margin:1rem 0;">
+                  <figure style="text-align:center; margin:1rem 0;">
+                  <img src="static/images/converted_RL_datasets.png"
+                       alt="Converted Standard RL datasets in Manipulation"
+                       loading="lazy"
+                       style="max-width:45%; height:auto;"/>
+                    <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
+                      Converted standard RL datasets in manipulation.
+                    </figcaption>
+                  </figure>
+                </div>
+              <p class="content">
+                <strong>Converted Standard RL datasets:</strong> We transform the open-source RoboFactory datasets into a format suitable for goal-conditioned offline MARL. Specifically, we reorganize the data into a standard Markov Decision Process (MDP) structure, where each sample includes a randomly sampled goal and a corresponding goal-conditioned reward. In contrast to the original datasets which is designed primarily for imitation learning frameworks such as Diffusion Policy (DP), our reformulation enables direct training of goal-conditioned offline MARL algorithms.
+              </p>
+
+              <p class="content">
+                <strong>Multi-goal Evaluation:</strong> We utilize open-source datasets in OGBench. For complete assessment, we evaluate performance based on five predefined goals as outlined in OGBench.
+              </p>
+              
+              <div style="text-align:center; margin:1rem 0;">
+                  <figure style="text-align:center; margin:1rem 0;">
+                  <img src="static/images/goal-related_reward_locomotion.png"
+                       alt="Multi-agent Setting in Locomotion"
+                       loading="lazy"
+                       style="max-width:30%; height:auto;"/>
+                    <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
+                      Multi-agent setting and structured factorization for locomotion tasks.
+                    </figcaption>
+                  </figure>
+                </div>
+               <p class="content">
+                <strong>Goal-related Rewards Design:</strong> For joint-control tasks, we design a global goal-related reward to evaluate the collective efficacy of the unified control system.
+                The reward is computed based on the global observation and the global goal, reflecting the overall performance of the entire robot (e.g., the locomotion system’s global orientation and position). 
+                The same scalar reward value is then broadcast to all agents, ensuring consistent optimization across all control modules.
+                This design allows all agents in the unified control system to jointly pursue the same global objective while maintaining synchronized reward feedback.
+              </p>
+
+              <p class="content">
+                <strong>Tasks and Demos:</strong> We extend the AntMaze and AntSoccer tasks in OGBench to a multi-agent setting. Example demos are shown as below, note that the first row of the videos corresponds to the input goal state.
+              </p>
+              <div class="columns is-multiline">
+                <div class="column is-half">
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Antmaze-Medium Demo</h3>
+                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+                    <source src="static/videos/antmaze-medium-navigate.mp4" type="video/mp4">
+                  </video>
+                  <p class="content is-size-7" style="margin-top:0.5rem;">
+                    In this task, multiple agents jointly control different body parts to navigate through the maze and reach the goal. Following OGBench, we construct four maze variants with increasing spatial complexity, including <strong>medium</strong>, <strong>large</strong> and <strong>giant</strong>. The datasets also match the OGBench taxonomy: <strong>Navigate</strong> (hiqh-quality), <strong>Stitch</strong> (short goal-reaching trajectories), and <strong>Explore</strong> (low-quality but high-coverage). 
+                  </p>
+                </div>
+                <div class="column is-half">
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntMaze-Teleport Demo</h3>
+                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+                    <source src="static/videos/ihiql_antmaze_medium_teleport.mp4" type="video/mp4">
+                  </video>
+                  <p class="content is-size-7" style="margin-top:0.5rem;">
+                    "Teleport Maze" is a specially designed maze intended to test agents' ability to cope with environmental stochasticity. The maze features multiple random teleportation devices, where a black hole instantly transports the ant to a randomly selected white hole. However, since one of the three white holes leads to a dead end, using a teleportation device always carries risk. Agents must therefore learn to avoid black holes while resisting the temptation to become blindly optimistic after a lucky outcome. 
+                  </p>
+                </div>
+                <div class="column is-half">
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Arena Demo</h3>
+                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+                    <source src="static/videos/antsoccer-arena-navigate.mp4" type="video/mp4">
+                  </video>
+                  <p class="content is-size-7" style="margin-top:0.5rem;">
+                    In the Ant-Soccer environment, a simulated ant is controlled by two or four cooperative agents, each manipulating specific joints to push a football and reach the goal. The task emphasizes coordinated control for smooth locomotion and effective ball interaction. In Arena setting, agents operate in an open field without obstacles, learning stable walking gaits and precise force application to push the ball and reach the goal while maintaining balance and continuous contact.
+                  </p>
+                </div>
+                <div class="column is-half">
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Medium Demo</h3>
+                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
+                    <source src="static/videos/atsoccer-medium-navigate.mp4" type="video/mp4">
+                  </video>
+                  <p class="content is-size-7" style="margin-top:0.5rem;">
+                    The Maze setting introduces walls and narrow corridors between the start and goal positions, where agents must combine locomotion, ball control, and navigation planning to maneuver through the maze without trapping the ball, making it significantly more challenging than the open-field setting.
+                  </p>              
+                </div>
+              
+              </div>
+              
+              
+            </div>
+          </div>
+        </div>
+
+
+        
+      </div>
     </section>
 
     
-<!-- GRID SECTION -->
-<section class="section">
-  <div class="columns is-centered is-multiline">
-    <div class="column is-three-fifths">
-      <h2 class="title is-3 has-text-centered">Proposed Benchmark: MangoBench</h2>
-      <p class="content has-text-centered" style="margin-bottom:1.5rem;">
-        To better evaluate the goal-conditioned offline MARL baselines, we create MangoBench. In this section, we will introduce our multi-agent setting, converted RL datasets, multi-goal evaluation, rewards design, and different tasks for cooperative locomotion and manipulation of our benchmarks.
-      </p>
-      
-      <div class="columns is-multiline">
-        <div class="column is-half">
-          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Training in Simulation</h3>
-          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-            <source src="static/videos/training.mp4" type="video/mp4">
-          </video>
-          <p class="content is-size-7" style="margin-top:0.5rem;">
-            decPLM is trained in IsaacLab with 2 Unitree Go2 quadrupeds and D1 arms using MAPPO and extensive
-            domain randomization over dynamics, contact parameters, and sensor noise.
-          </p>
-        </div>
-        <div class="column is-half">
-          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Generalization to 2-10 Robots</h3>
-          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-            <source src="static/videos/generalization_2_to_10_robot_grid.mp4" type="video/mp4">
-          </video>
-          <p class="content is-size-7" style="margin-top:0.5rem;">
-            A single policy trained only with 2 robots transfers to teams of 2-10 robots without retraining,
-            maintaining stable pinch-lift-move behaviors and improving tracking as team size increases.
-          </p>
-        </div>
-        <div class="column is-half">
-          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Evaluation on Diverse Payloads</h3>
-          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-            <source src="static/videos/evaluation_on_diverse_payload.mp4" type="video/mp4">
-          </video>
-          <p class="content is-size-7" style="margin-top:0.5rem;">
-            Policies trained on a box payload generalize to out-of-distribution objects such as logs, barrels,
-            and couches with different geometries and masses, without task-specific retraining.
-          </p>
-        </div>
-        <div class="column is-half">
-          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (2 robots)</h3>
-          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-            <source src="static/videos/sim2real_2_robots.mp4" type="video/mp4">
-          </video>
-          <p class="content is-size-7" style="margin-top:0.5rem;">
-            Two Unitree Go2 robots successfully execute the learned policy on real hardware, performing smooth
-            pinch, lift, and transport motions using decentralized control.
-          </p>              
-        </div>
-        <div class="column is-half">
-          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (3 robots)</h3>
-          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-            <source src="static/videos/sim2real_3_robots.mp4" type="video/mp4">
-          </video>
-          <p class="content is-size-7" style="margin-top:0.5rem;">
-            The same decentralized policy extends naturally to a 3-robot team, showing synchronized real-world
-            coordination driven entirely by shared policy parameters.
-          </p>
-        </div>
-        <div class="column is-half">
-          <h3 class="title is-5" style="margin-bottom: 0.75rem;">Sim-to-Real Transfer (4 robots)</h3>
-          <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-            <source src="static/videos/sim2real_4_robots.mp4" type="video/mp4">
-          </video>
-          <p class="content is-size-7" style="margin-top:0.5rem;">
-            A 4-robot team demonstrates cooperative transport with the same policy, highlighting the scalability
-            and real-world transferability of decPLM's decentralized design.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 
 
