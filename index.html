@@ -509,7 +509,7 @@
                 <div class="column is-half">
                   <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Arena Demo</h3>
                   <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/antsoccer-arena-navigate.mp4" type="video/mp4">
+                    <source src="static/videos/antsoccer_arena_navigate.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
                     In the Ant-Soccer environment, a simulated ant is controlled by two or four cooperative agents, each manipulating specific joints to push a football and reach the goal. The task emphasizes coordinated control for smooth locomotion and effective ball interaction. In Arena setting, agents operate in an open field without obstacles, learning stable walking gaits and precise force application to push the ball and reach the goal while maintaining balance and continuous contact.
@@ -518,7 +518,7 @@
                 <div class="column is-half">
                   <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Medium Demo</h3>
                   <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/atsoccer-medium-navigate.mp4" type="video/mp4">
+                    <source src="static/videos/antsoccer_medium_navigate.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
                     The Maze setting introduces walls and narrow corridors between the start and goal positions, where agents must combine locomotion, ball control, and navigation planning to maneuver through the maze without trapping the ball, making it significantly more challenging than the open-field setting.
@@ -558,7 +558,7 @@
                   <img src="static/images/converted_RL_datasets.png"
                        alt="Converted Standard RL datasets in Manipulation"
                        loading="lazy"
-                       style="max-width:45%; height:auto;"/>
+                       style="max-width:35%; height:auto;"/>
                     <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
                       Converted standard RL datasets in manipulation.
                     </figcaption>
@@ -568,30 +568,120 @@
                 <strong>Converted Standard RL datasets:</strong> We transform the open-source RoboFactory datasets into a format suitable for goal-conditioned offline MARL. Specifically, we reorganize the data into a standard Markov Decision Process (MDP) structure, where each sample includes a randomly sampled goal and a corresponding goal-conditioned reward. In contrast to the original datasets which is designed primarily for imitation learning frameworks such as Diffusion Policy (DP), our reformulation enables direct training of goal-conditioned offline MARL algorithms.
               </p>
 
+              <div style="text-align:center; margin:2rem 0;">
+                <figure style="text-align:center;">
+                  <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+                    <div>
+                      <img src="fig/goal_raw_LiftBarrier-rf_goal0_agent0.png"
+                           alt="descend"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">descend</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_LiftBarrier-rf_goal1_agent0.png"
+                           alt="dock"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">dock</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_LiftBarrier-rf_goal2_agent0.png"
+                           alt="grab"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">grab</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_LiftBarrier-rf_goal3_agent0.png"
+                           alt="lift"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">lift</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_LiftBarrier-rf_goal4_agent0.png"
+                           alt="hold"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">hold</div>
+                    </div>
+                  </div>
+              
+                  <figcaption style="margin-top:1rem; font-size:0.95rem; color:#555;">
+                    <strong>Lift-Barrier Task.</strong> Predefined evaluation goals (from left to right):
+                    descend, dock, grab, lift, and hold.
+                  </figcaption>
+                </figure>
+              </div>
+
+              <div style="text-align:center; margin:2rem 0;">
+                <figure style="text-align:center;">
+                  <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+                    <div>
+                      <img src="fig/goal_raw_PlaceFood_goal0_agent0.png"
+                           alt="descend"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">descend</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_PlaceFood_goal1_agent0.png"
+                           alt="grab"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">grab</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_PlaceFood_goal2_agent0.png"
+                           alt="lift"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">lift</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_PlaceFood_goal3_agent0.png"
+                           alt="move"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">move</div>
+                    </div>
+                    <div>
+                      <img src="fig/goal_raw_PlaceFood_goal4_agent0.png"
+                           alt="place"
+                           loading="lazy"
+                           style="width:18%; min-width:120px; height:auto;">
+                      <div style="margin-top:0.3rem; font-size:0.9rem;">place</div>
+                    </div>
+                  </div>
+              
+                  <figcaption style="margin-top:1rem; font-size:0.95rem; color:#555;">
+                    <strong>Place-Food Task.</strong> Predefined evaluation goals (from left to right):
+                    descend, grab, lift, move, and place.
+                  </figcaption>
+                </figure>
+              </div>
               <p class="content">
-                <strong>Multi-goal Evaluation:</strong> We utilize open-source datasets in OGBench. For complete assessment, we evaluate performance based on five predefined goals as outlined in OGBench.
+                <strong>Multi-goal Evaluation:</strong> To avoid biased evaluation, each manipulation task is associated with 5 clearly defined sequential multiple goals to facilitate consistent comparison across algorithms. To ensure robustness, all evaluation metrics are averaged over 100 random seeds.
               </p>
               
               <div style="text-align:center; margin:1rem 0;">
                   <figure style="text-align:center; margin:1rem 0;">
-                  <img src="static/images/goal-related_reward_locomotion.png"
+                  <img src="static/images/goal-related_reward_manipulation.png"
                        alt="Multi-agent Setting in Locomotion"
                        loading="lazy"
-                       style="max-width:30%; height:auto;"/>
+                       style="max-width:60%; height:auto;"/>
                     <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
                       Multi-agent setting and structured factorization for locomotion tasks.
                     </figcaption>
                   </figure>
                 </div>
                <p class="content">
-                <strong>Goal-related Rewards Design:</strong> For joint-control tasks, we design a global goal-related reward to evaluate the collective efficacy of the unified control system.
-                The reward is computed based on the global observation and the global goal, reflecting the overall performance of the entire robot (e.g., the locomotion system’s global orientation and position). 
-                The same scalar reward value is then broadcast to all agents, ensuring consistent optimization across all control modules.
-                This design allows all agents in the unified control system to jointly pursue the same global objective while maintaining synchronized reward feedback.
+                <strong>Goal-related Rewards Design:</strong> For multi-entity tasks, the reward function adopts a localized formulation that captures each entity’s individual contribution to the overall task performance. Each agent receives a goal-conditioned reward computed from its local observation and local goal, enabling each entity independently optimizes its goal-conditioned behavior while contributing to the cooperative task outcome.
               </p>
 
               <p class="content">
-                <strong>Tasks and Demos:</strong> We extend the AntMaze and AntSoccer tasks in OGBench to a multi-agent setting. Example demos are shown as below, note that the first row of the videos corresponds to the input goal state.
+                <strong>Tasks and Demos:</strong> We adopt several two-agent cooperative manipulation tasks from RoboFactory for our experiments. Example demos are shown as below.
               </p>
               <div class="columns is-multiline">
                 <div class="column is-half">
