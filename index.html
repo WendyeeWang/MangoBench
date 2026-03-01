@@ -572,35 +572,35 @@
                 <figure style="text-align:center;">
                   <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
                     <div>
-                      <img src="fig/goal_raw_LiftBarrier-rf_goal0_agent0.png"
+                      <img src="static/images/goal_raw_LiftBarrier-rf_goal0_agent0.png"
                            alt="descend"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">descend</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_LiftBarrier-rf_goal1_agent0.png"
+                      <img src="static/images/goal_raw_LiftBarrier-rf_goal1_agent0.png"
                            alt="dock"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">dock</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_LiftBarrier-rf_goal2_agent0.png"
+                      <img src="static/images/goal_raw_LiftBarrier-rf_goal2_agent0.png"
                            alt="grab"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">grab</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_LiftBarrier-rf_goal3_agent0.png"
+                      <img src="static/images/goal_raw_LiftBarrier-rf_goal3_agent0.png"
                            alt="lift"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">lift</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_LiftBarrier-rf_goal4_agent0.png"
+                      <img src="static/images/goal_raw_LiftBarrier-rf_goal4_agent0.png"
                            alt="hold"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
@@ -619,35 +619,35 @@
                 <figure style="text-align:center;">
                   <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
                     <div>
-                      <img src="fig/goal_raw_PlaceFood_goal0_agent0.png"
+                      <img src="static/images/goal_raw_PlaceFood_goal0_agent0.png"
                            alt="descend"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">descend</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_PlaceFood_goal1_agent0.png"
+                      <img src="static/images/goal_raw_PlaceFood_goal1_agent0.png"
                            alt="grab"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">grab</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_PlaceFood_goal2_agent0.png"
+                      <img src="static/images/goal_raw_PlaceFood_goal2_agent0.png"
                            alt="lift"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">lift</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_PlaceFood_goal3_agent0.png"
+                      <img src="static/images/goal_raw_PlaceFood_goal3_agent0.png"
                            alt="move"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
                       <div style="margin-top:0.3rem; font-size:0.9rem;">move</div>
                     </div>
                     <div>
-                      <img src="fig/goal_raw_PlaceFood_goal4_agent0.png"
+                      <img src="static/images/goal_raw_PlaceFood_goal4_agent0.png"
                            alt="place"
                            loading="lazy"
                            style="width:18%; min-width:120px; height:auto;">
@@ -685,41 +685,24 @@
               </p>
               <div class="columns is-multiline">
                 <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Antmaze-Medium Demo</h3>
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">LiftBarrier Demo</h3>
                   <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/antmaze-medium-navigate.mp4" type="video/mp4">
+                    <source src="static/videos/liftbarrier.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    In this task, multiple agents jointly control different body parts to navigate through the maze and reach the goal. Following OGBench, we construct four maze variants with increasing spatial complexity, including <strong>medium</strong>, <strong>large</strong> and <strong>giant</strong>. The datasets also match the OGBench taxonomy: <strong>Navigate</strong> (hiqh-quality), <strong>Stitch</strong> (short goal-reaching trajectories), and <strong>Explore</strong> (low-quality but high-coverage). 
+                    The lift-barrier is a synchronous manipulation task that requires two robotic arms to simultaneously grasp both sides of a barrier and lift it to a target height, demanding precise temporal coordination between agents.
                   </p>
                 </div>
                 <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntMaze-Teleport Demo</h3>
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">PlaceFood Demo</h3>
                   <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/ihiql_antmaze_medium_teleport.mp4" type="video/mp4">
+                    <source src="static/videos/placefood.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    "Teleport Maze" is a specially designed maze intended to test agents' ability to cope with environmental stochasticity. The maze features multiple random teleportation devices, where a black hole instantly transports the ant to a randomly selected white hole. However, since one of the three white holes leads to a dead end, using a teleportation device always carries risk. Agents must therefore learn to avoid black holes while resisting the temptation to become blindly optimistic after a lucky outcome. 
+                    The place-food task involves asynchronous cooperation, where one arm must first open the pot lid before the other arm can place the food inside.
                   </p>
                 </div>
-                <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Arena Demo</h3>
-                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/antsoccer-arena-navigate.mp4" type="video/mp4">
-                  </video>
-                  <p class="content is-size-7" style="margin-top:0.5rem;">
-                    In the Ant-Soccer environment, a simulated ant is controlled by two or four cooperative agents, each manipulating specific joints to push a football and reach the goal. The task emphasizes coordinated control for smooth locomotion and effective ball interaction. In Arena setting, agents operate in an open field without obstacles, learning stable walking gaits and precise force application to push the ball and reach the goal while maintaining balance and continuous contact.
-                  </p>
-                </div>
-                <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Medium Demo</h3>
-                  <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/atsoccer-medium-navigate.mp4" type="video/mp4">
-                  </video>
-                  <p class="content is-size-7" style="margin-top:0.5rem;">
-                    The Maze setting introduces walls and narrow corridors between the start and goal positions, where agents must combine locomotion, ball control, and navigation planning to maneuver through the maze without trapping the ball, making it significantly more challenging than the open-field setting.
-                  </p>              
-                </div>
+              
               
               </div>
               
