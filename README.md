@@ -1,4 +1,4 @@
-# Academic Project Page Template
+# The project page of "MangoBench: A Benchmark for Multi-Agent Goal-Conditioned Offline Reinforcement Learning"
 
 > **Update (September 2025)**: This template has been modernized with better design, SEO, and mobile support. For the original version, see the [original-version branch](https://github.com/eliahuhorwitz/Academic-project-page-template/tree/original-version).
 
