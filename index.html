@@ -683,7 +683,59 @@
       </div>
     </section>
 
-    
+    <!-- Results and Discussion -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Results and Discussion</h2>
+            <h3 class="title is-4" style="margin-bottom:0.75rem;">Benchmarking Results</h3>
+            <div class="content has-text-justified">
+            
+            <figure style="text-align:center; margin:1rem 0;">
+              <img src="static/images/task_comparison_8subplots_final_01.png"
+                   alt="Results"
+                   loading="lazy"
+                   style="max-width:80%; height:auto; display:block; margin:0 auto;" />
+              <img src="static/images/manipulation_tasks_01.png"
+                   alt="manipulation_tasks"
+                   loading="lazy"
+                   style="max-width:80%; height:auto; display:block; margin:0.5rem auto 0;" />
+              <figcaption style="margin-top:0.75rem; font-size:0.95rem; color:#555;">
+                <strong>Benchmark Results.</strong> For locomotion tasks, we report each method's average
+                success rate (%) across five test-time goals, averaged over 5 seeds with standard
+                deviations shown as error bars. Due to the poor performance of GCOMIGA and GCOMAR, they
+                are excluded from more challenging manipulation tasks. For manipulation tasks, we report
+                the average success rate (%) over 100 seeds for three top-performing baselines and the
+                imitation learning method DP, along with training time.
+              </figcaption>
+            </figure>
+
+            <div class="col-md-12">
+                <a data-toggle="collapse" href="#full" aria-expanded="false" aria-controls="ch_more">
+                    <h3 class="top10 bottom20">
+                        <b>Show the full benchmark table</b>
+                    </h3>
+                </a>
+                <div class="collapse" id="full">
+                    <p><img src="static/images/results_table.png" style="width: 100%;"></p>
+                </div>
+            </div>
+
+            <h3 class="title is-4" style="margin-bottom:0.75rem;">Future Research</h3>
+            <p>
+              <strong>Designing Improved Algorithms under the CTDE Setting.</strong> Our analysis reveals that the performance degradation of HIQL-CTDE primarily stems not from the CTDE paradigm itself, but from the increased architectural complexity introduced by the global goal representation network and the resulting misalignment between centralized and decentralized goal representations. The direct integration of a global goal encoder, while conceptually reasonable, creates additional learning challenges that hinder stable optimization, especially in large-scale or long-horizon tasks. These observations suggest that the CTDE framework still holds untapped potential for hierarchical goal-conditioned learning. We encourage future research to explore more efficient and coherent architectures for HIQL-CTDE, ones that preserve the coordination advantages of CTDE while mitigating its training instability. Such designs could potentially build upon the strong performance of IHIQL and further advance the understanding of goal representation learning in multi-agent settings.
+            </p>
+
+            <p>
+              <strong>Solving Sparse Reward Problem in Offline MARL.</strong> The analysis of OMIGA and OMAR reveals that existing offline MARL fail to overcome the challenge of sparse rewards. Since the dense rewards in real-world tasks (especially in multi-agent tasks) are difficult to design, we invite researchers to design more offline MARL or goal-conditioned offline MARL algorithms to address this issue.
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Results and Discussion -->
 
 
 
