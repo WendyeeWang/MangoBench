@@ -393,7 +393,7 @@
           <img src="static/images/comprehensive_baselines.png"
                alt="Comprehensive Baselines"
                loading="lazy"
-               style="max-width:80%; height:auto;" />
+               style="max-width:70%; height:auto;" />
           <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
             Fully decentralized and CTDE paradigms with structured goal factorization for goal-conditioned offline MARL
           </figcaption>
@@ -460,12 +460,16 @@
                 The global goal corresponds to the complete joint states of the ant, whereas the local goals are derived from the structured factorization of the robot’s body, where each body part is assigned a goal based on its corresponding local joints for baseline training.
               </p>
 
+              <p class="content">
+                <strong>Multi-goal Evaluation:</strong> We utilize open-source datasets in OGBench. For complete assessment, we evaluate performance based on five predefined goals as outlined in OGBench.
+              </p>
+              
               <div style="text-align:center; margin:1rem 0;">
                   <figure style="text-align:center; margin:1rem 0;">
                   <img src="static/images/goal-related_reward_locomotion.png"
                        alt="Multi-agent Setting in Locomotion"
                        loading="lazy"
-                       style="max-width:50%; height:auto;"/>
+                       style="max-width:30%; height:auto;"/>
                     <figcaption style="margin-top:0.5rem; font-size:0.95rem; color:#555;">
                       Multi-agent setting and structured factorization for locomotion tasks.
                     </figcaption>
@@ -478,26 +482,26 @@
                 This design allows all agents in the unified control system to jointly pursue the same global objective while maintaining synchronized reward feedback.
               </p>
 
-              
+              <p class="content">
+                <strong>Tasks and Demos:</strong> We extend the AntMaze and AntSoccer tasks in OGBench to a multi-agent setting. Example demos are shown as below.
+              </p>
               <div class="columns is-multiline">
                 <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Training in Simulation</h3>
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Antmaze-Medium Demo</h3>
                   <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
-                    <source src="static/videos/training.mp4" type="video/mp4">
+                    <source src="static/videos/antmaze-medium-navigate.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    decPLM is trained in IsaacLab with 2 Unitree Go2 quadrupeds and D1 arms using MAPPO and extensive
-                    domain randomization over dynamics, contact parameters, and sensor noise.
+                    In this task, multiple agents jointly control different body parts to navigate through the maze and reach the goal. Following OGBench, we construct four maze variants with increasing spatial complexity, including <strong>medium</strong>, <strong>large</strong> and <strong>giant</strong>. The datasets also match the OGBench taxonomy: <strong>Navigate</strong> (hiqh-quality), <strong>Stitch</strong> (short goal-reaching trajectories), and <strong>Explore</strong> (low-quality but high-coverage). By varying maze scale and dataset type, we systematically assess how algorithms adapt to increasing environmental complexity, cooperative skill composition, and data diversity. 
                   </p>
                 </div>
                 <div class="column is-half">
-                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">Generalization to 2-10 Robots</h3>
+                  <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntMaze-Teleport Demo</h3>
                   <video controls muted loop autoplay playsinline width="100%" preload="metadata" style="border-radius: var(--border-radius);">
                     <source src="static/videos/generalization_2_to_10_robot_grid.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    A single policy trained only with 2 robots transfers to teams of 2-10 robots without retraining,
-                    maintaining stable pinch-lift-move behaviors and improving tracking as team size increases.
+                    "Teleport Maze" is a specially designed maze intended to test agents' ability to cope with environmental stochasticity. The maze features multiple random teleportation devices, where a black hole instantly transports the ant to a randomly selected white hole. However, since one of the three white holes leads to a dead end, using a teleportation device always carries risk. Agents must therefore learn to avoid black holes while resisting the temptation to become blindly optimistic after a lucky outcome. 
                   </p>
                 </div>
                 <div class="column is-half">
