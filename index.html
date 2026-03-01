@@ -394,9 +394,7 @@
             Fully decentralized and CTDE paradigms with structured goal factorization for goal-conditioned offline MARL
           </figcaption>
         </figure>
-        <p>
-          Given the lack of existing algorithms tailored for goal-conditioned offline MARL, we introduce six baseline methods, four derived from goal-conditioned offline RL and two from offline MARL, to establish a foundation for future research and advancements in this direction.
-        </p>
+        
             <ul>
               <li><strong>GCMBC</strong>: A fully decentralized extension of GCBC, serving as a fundamental baseline representing the behavioral performance of the dataset. </li>
               <li><strong>ICRL</strong>: A fully decentralized multi-agent extension of CRL, designed to evaluate the effectiveness of contrastive value learning in handling sparse rewards for multi-agent tasks.</li>
@@ -440,20 +438,6 @@
                 <strong>Multi-Agent Setting:</strong> We introduce a structured factorization of the robot body into different joints to make multiple agents within a single robot locomote cooperatively. The locomotion tasks involve three distinct multi-agent settings, including 2 agents × 4 joints, 2 agents × 4 joints (diagonal) and 4 agents × 2 joints.
               </p>
               
-              <ul>
-                <li>
-                  <strong>2 agents × 4 joints:</strong> The ant has 4 legs, each with 2 joints, totaling 8 joints. In this setting, the 8 joints are split between two agents, each controlling 4 joints. The division typically follows a left-right or front-back grouping.
-                </li>
-              
-                <li>
-                  <strong>2 agents × 4 joints (D):</strong> This variant also assigns four joints to each of the two agents, but the assignment is done diagonally. For instance, one agent may control the front-left and rear-right legs, while the other controls the front-right and rear-left legs. This cross-pattern configuration introduces more complex coordination dynamics.
-                </li>
-              
-                <li>
-                  <strong>4 agents × 2 joints:</strong> Each leg (2 joints) is controlled by a separate agent. Thus, 4 agents are assigned one leg each, requiring a higher level of coordination among more agents, each with more localized control.
-                </li>
-              </ul>
-              
               <p class="content">
                 The global goal corresponds to the complete joint states of the ant, whereas the local goals are derived from the structured factorization of the robot’s body, where each body part is assigned a goal based on its corresponding local joints for baseline training.
               </p>
@@ -490,7 +474,7 @@
                     <source src="static/videos/antmaze-medium-navigate.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    In this task, multiple agents jointly control different body parts to navigate through the maze and reach the goal. Following OGBench, we construct four maze variants with increasing spatial complexity, including <strong>medium</strong>, <strong>large</strong> and <strong>giant</strong>. The datasets also match the OGBench taxonomy: <strong>Navigate</strong> (hiqh-quality), <strong>Stitch</strong> (short goal-reaching trajectories), and <strong>Explore</strong> (low-quality but high-coverage). 
+                    In this task, multiple agents jointly control different body parts to navigate through the maze and reach the goal. 
                   </p>
                 </div>
                 <div class="column is-half">
@@ -499,8 +483,7 @@
                     <source src="static/videos/ihiql_antmaze_medium_teleport.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    "Teleport Maze" is a specially designed maze intended to test agents' ability to cope with environmental stochasticity. The maze features multiple random teleportation devices, where a black hole instantly transports the ant to a randomly selected white hole. However, since one of the three white holes leads to a dead end, using a teleportation device always carries risk. Agents must therefore learn to avoid black holes while resisting the temptation to become blindly optimistic after a lucky outcome. 
-                  </p>
+                    "Teleport Maze" is a specially designed maze intended to test agents' ability to cope with environmental stochasticity. The maze features multiple random teleportation devices, where a black hole instantly transports the ant to a randomly selected white hole. 
                 </div>
                 <div class="column is-half">
                   <h3 class="title is-5" style="margin-bottom: 0.75rem;">AntSoccer-Arena Demo</h3>
@@ -508,7 +491,7 @@
                     <source src="static/videos/antsoccer_arena_navigate.mp4" type="video/mp4">
                   </video>
                   <p class="content is-size-7" style="margin-top:0.5rem;">
-                    In the Ant-Soccer environment, a simulated ant is controlled by two or four cooperative agents, each manipulating specific joints to push a football and reach the goal. The task emphasizes coordinated control for smooth locomotion and effective ball interaction. In Arena setting, agents operate in an open field without obstacles, learning stable walking gaits and precise force application to push the ball and reach the goal while maintaining balance and continuous contact.
+                    In the Ant-Soccer environment, a simulated ant is controlled by two or four cooperative agents, each manipulating specific joints to push a football and reach the goal. In Arena setting, agents operate in an open field without obstacles, learning stable walking gaits and precise force application to push the ball and reach the goal while maintaining balance and continuous contact.
                   </p>
                 </div>
                 <div class="column is-half">
@@ -749,7 +732,7 @@
                 <div class="column is-full">
                   <h3 class="title is-4" style="margin-bottom:0.75rem;">Future Research</h3>
                   <p>
-                    <strong>Designing Improved Algorithms under the CTDE Setting.</strong> Our analysis reveals that the performance degradation of HIQL-CTDE primarily stems not from the CTDE paradigm itself, but from the increased architectural complexity introduced by the global goal representation network and the resulting misalignment between centralized and decentralized goal representations. The direct integration of a global goal encoder, while conceptually reasonable, creates additional learning challenges that hinder stable optimization, especially in large-scale or long-horizon tasks. These observations suggest that the CTDE framework still holds untapped potential for hierarchical goal-conditioned learning. We encourage future research to explore more efficient and coherent architectures for HIQL-CTDE, ones that preserve the coordination advantages of CTDE while mitigating its training instability. Such designs could potentially build upon the strong performance of IHIQL and further advance the understanding of goal representation learning in multi-agent settings.
+                    <strong>Designing Improved Algorithms under the CTDE Setting.</strong> We encourage future research to explore more efficient and coherent architectures for HIQL-CTDE, ones that preserve the coordination advantages of CTDE while mitigating its training instability. Such designs could potentially build upon the strong performance of IHIQL and further advance the understanding of goal representation learning in multi-agent settings.
                   </p>
       
                   <p>
